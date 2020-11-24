@@ -9,7 +9,7 @@ const getParameter = (): number => {
     return -9999;
   }
   const betName = betNameElement.textContent.trim();
-  const parameterRegex = /\((\d+(?:\.\d+)?)\)/;
+  const parameterRegex = /\(([+-]?\d+(?:\.\d+)?)\)/;
   const parameterMatch = betName.match(parameterRegex);
   if (parameterMatch) {
     return Number(parameterMatch[1]);
