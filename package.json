@@ -1,5 +1,5 @@
 {
-  "name": "@kot-shrodingera-team/sbet",
+  "name": "@kot-shrodingera-team/cbet",
   "version": "1.0.1",
   "devDependencies": {
     "@kot-shrodingera-team/eslint-config-germes": "^1.0.4",
