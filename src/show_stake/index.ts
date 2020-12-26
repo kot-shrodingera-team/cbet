@@ -37,6 +37,11 @@ const showStake = async (): Promise<void> => {
     }
     updateBalance();
 
+    log(
+      `Ищем ставку\nСобытие: ${worker.TeamOne} - ${worker.TeamTwo}\nИсход: ${worker.BetName}`,
+      'steelblue'
+    );
+
     await preCheck();
 
     await openEvent();

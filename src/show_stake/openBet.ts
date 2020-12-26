@@ -15,27 +15,31 @@ const openBet = async (): Promise<void> => {
 
   // getMarketTitles();
 
-  log('Ищем маркет', 'steelblue');
-  const marketElement = (await getElement(
-    `.markets .market[mkey^="${marketTypeId}"]`,
-    10000,
-    window.frames[1].document
-  )) as HTMLElement;
+  const correctMarketName = marketName.split(' – ').slice(0, -1).join(' - ');
+  log(`Ищем маркет "${correctMarketName}"`, 'steelblue');
+  log(`.markets .market [title="${correctMarketName}"]`, 'white', true);
+  const marketElement = (
+    await getElement(
+      `.markets .market [title="${correctMarketName}"]`,
+      10000,
+      window.frames[1].document
+    )
+  ).parentElement as HTMLElement;
   if (!marketElement) {
     throw new JsFailError('Нужный маркет не найден');
   }
   const marketElements = window.frames[1].document.querySelectorAll(
-    `.markets .market[mkey^="${marketTypeId}"]`
+    `.markets .market [title="${correctMarketName}"]`
   );
   if (marketElements.length !== 1) {
     throw new JsFailError('Найдено более одного подходящего маркета');
   }
-  const marketTitleElement = marketElement.querySelector('.title');
-  if (!marketTitleElement) {
-    throw new JsFailError('Заголовок маркета не найден');
-  }
-  const marketTitle = marketTitleElement.getAttribute('title');
-  log(`Маркет найден. Заголовок: "${marketTitle}"`, 'steelblue');
+  // const marketTitleElement = marketElement.querySelector('.title');
+  // if (!marketTitleElement) {
+  //   throw new JsFailError('Заголовок маркета не найден');
+  // }
+  // const marketTitle = marketTitleElement.getAttribute('title');
+  // log(`Маркет найден. Заголовок: "${marketTitle}"`, 'steelblue');
 
   const oddElements = marketElement.querySelectorAll('.market-odds > div');
   if (oddElements.length === 0) {
@@ -44,19 +48,21 @@ const openBet = async (): Promise<void> => {
   log(`Найдено ставок в маркете: ${oddElements.length}`, 'steelblue');
   oddElements.forEach((odd) => {
     const title = odd.getAttribute('title');
-    log(title);
+    log(title, 'white', true);
   });
 
   const cbetOddName = getCbetOddName(marketName);
   if (!cbetOddName) {
     throw new JsFailError('Не удалось сформировать роспись ставки для поиска');
   }
+  log(`Ищем ставку "${cbetOddName}"`, 'steelblue');
   const odd = marketElement.querySelector(
     `.market-odds > div[title="${cbetOddName}"]`
   ) as HTMLElement;
   if (!odd) {
-    throw new JsFailError(`Нужная ставка не найдена (${cbetOddName})`);
+    throw new JsFailError('Ставка не найдена');
   }
+  log('Нашли ставку', 'steelblue');
 
   const maxTryCount = 5;
   for (let i = 1; i <= maxTryCount; i += 1) {
