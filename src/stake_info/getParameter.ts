@@ -22,7 +22,7 @@ const getParameter = (): number => {
   if (parameterMatch) {
     return Number(parameterMatch[1]);
   }
-  if (market === 'Draw no bet') {
+  if (/Draw no bet/.test(market)) {
     return 0;
   }
   // Ставка Exact total goals 3+ === Over (2.5)
