@@ -1,4 +1,4 @@
-import { log, checkUrl } from '@kot-shrodingera-team/germes-utils';
+import { checkBookerHost, log } from '@kot-shrodingera-team/germes-utils';
 import clearCoupon from './clearCoupon';
 import { updateBalance } from '../stake_info/getBalance';
 // import setBetAcceptMode from './setBetAcceptMode';
@@ -17,7 +17,7 @@ const showStake = async (): Promise<void> => {
   localStorage.setItem('couponOpening', '1');
   couponOpenning = true;
   try {
-    if (!checkUrl()) {
+    if (!checkBookerHost()) {
       log('Открыта не страница конторы (или зеркала)', 'crimson');
       window.location.href = new URL(worker.BookmakerMainUrl).href;
       throw new NewUrlError('Открывает страницу БК');
