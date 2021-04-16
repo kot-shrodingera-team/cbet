@@ -1,12 +1,17 @@
 import checkStakeEnabledGenerator from '@kot-shrodingera-team/germes-generators/stake_info/checkStakeEnabled';
+import { log } from '@kot-shrodingera-team/germes-utils';
 import getStakeCount from './getStakeCount';
 
-// const preCheck = (): boolean => {
-//   return true;
-// };
+const preCheck = (): boolean => {
+  if (window.germesData.stakeDisabled) {
+    log('Ставка недоступна (превышен макс)', 'crimson');
+    return false;
+  }
+  return true;
+};
 
 const checkStakeEnabled = checkStakeEnabledGenerator({
-  // preCheck,
+  preCheck,
   getStakeCount,
   betCheck: {
     selector: '.betslip-body li.price',

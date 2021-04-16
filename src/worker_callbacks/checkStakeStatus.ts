@@ -14,6 +14,9 @@ const checkStakeStatus = (): boolean => {
   if (warningElement) {
     const warningText = warningElement.textContent.trim();
     log(`Текст ошибки: "${warningText}"`, 'tomato');
+    if (/Amount Is More Than Max Betting Amount/i.test(warningText)) {
+      window.germesData.stakeDisabled = true;
+    }
     log('Ставка не принята', 'red');
     return false;
   }
