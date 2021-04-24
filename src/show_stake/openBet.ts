@@ -1,9 +1,17 @@
 import { awaiter, getElement, log } from '@kot-shrodingera-team/germes-utils';
+import { updateBalance } from '../stake_info/getBalance';
 import getStakeCount from '../stake_info/getStakeCount';
+import clearCoupon from './clearCoupon';
 import JsFailError from './errors/jsFailError';
 import getCbetOddName from './getCbetOddName';
 
 const openBet = async (): Promise<void> => {
+  const couponCleared = await clearCoupon();
+  if (!couponCleared) {
+    throw new JsFailError('Не удалось очистить купон');
+  }
+  updateBalance();
+
   const [
     marketName,
     marketTypeId,

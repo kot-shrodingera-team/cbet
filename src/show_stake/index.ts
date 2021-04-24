@@ -1,6 +1,4 @@
 import { checkBookerHost, log } from '@kot-shrodingera-team/germes-utils';
-import clearCoupon from './clearCoupon';
-import { updateBalance } from '../stake_info/getBalance';
 // import setBetAcceptMode from './setBetAcceptMode';
 import checkAuth, { authStateReady } from '../stake_info/checkAuth';
 import JsFailError from './errors/jsFailError';
@@ -32,12 +30,6 @@ const showStake = async (): Promise<void> => {
       throw new JsFailError('Нет авторизации');
     }
     log('Есть авторизация', 'steelblue');
-
-    const couponCleared = await clearCoupon();
-    if (!couponCleared) {
-      throw new JsFailError('Не удалось очистить купон');
-    }
-    updateBalance();
 
     log(
       `Ищем ставку\nСобытие: ${worker.TeamOne} - ${worker.TeamTwo}\nИсход: ${worker.BetName}`,
