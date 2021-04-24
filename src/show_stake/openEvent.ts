@@ -2,10 +2,10 @@ import {
   awaiter,
   getElement,
   log,
-  sleep,
+  // sleep,
 } from '@kot-shrodingera-team/germes-utils';
 import JsFailError from './errors/jsFailError';
-import NewUrlError from './errors/newUrlError';
+// import NewUrlError from './errors/newUrlError';
 
 // let hiddenLink: HTMLAnchorElement;
 
