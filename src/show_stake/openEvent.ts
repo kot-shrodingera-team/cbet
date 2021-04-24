@@ -27,9 +27,11 @@ const openEvent = async (): Promise<void> => {
   }
   log('Открыта не страница нужного события', 'steelblue');
 
-  const filterButton = window.frames[1].document.querySelector(
-    '.eye'
-  ) as HTMLElement;
+  const filterButton = await getElement<HTMLElement>(
+    '.eye',
+    5000,
+    window.frames[1].document
+  );
   if (!filterButton) {
     throw new JsFailError('Не найдена кнопка фильтров событий');
   }
