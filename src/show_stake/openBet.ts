@@ -23,7 +23,11 @@ const openBet = async (): Promise<void> => {
 
   // getMarketTitles();
 
-  const correctMarketName = marketName.split(' – ').slice(0, -1).join(' - ');
+  const correctMarketName = marketName
+    .replace('amp_suck', '&') // почему появляется amp_suck?
+    .split(' – ')
+    .slice(0, -1)
+    .join(' - ');
   log(`Ищем маркет "${correctMarketName}"`, 'steelblue');
   log(`.markets .market [title="${correctMarketName}"]`, 'white', true);
   const marketElement = (
