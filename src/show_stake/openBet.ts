@@ -14,11 +14,11 @@ const openBet = async (): Promise<void> => {
 
   const [
     marketName,
-    marketTypeId,
-    runnerPid,
-    runnerFpid,
-    runnerId,
-    parameter,
+    // marketTypeId,
+    // runnerPid,
+    // runnerFpid,
+    // runnerId,
+    // parameter,
   ] = worker.BetId.split('|');
 
   // getMarketTitles();
