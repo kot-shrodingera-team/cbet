@@ -26,6 +26,10 @@ const preCheck = async (): Promise<void> => {
     }
   }
   log('Открыт Live', 'steelblue');
+  const sportsbookIFrame = await getElement('iframe[name="sportsbook_iframe"]');
+  if (!sportsbookIFrame) {
+    throw new JsFailError('Не дождались появления Sportsbook фрейма');
+  }
 };
 
 export default preCheck;
