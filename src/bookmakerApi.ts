@@ -5,6 +5,7 @@ interface BookmakerApi {
 declare global {
   const api: BookmakerApi;
   interface GermesData {
+    decreasingMaximumStake: number;
     stakeDisabled: boolean;
   }
 }
@@ -17,6 +18,7 @@ export const clearGermesData = (): void => {
     doStakeTime: undefined,
     betProcessingTimeout: 50000,
 
+    decreasingMaximumStake: undefined,
     stakeDisabled: undefined,
   };
 };
